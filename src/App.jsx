@@ -19,12 +19,11 @@ function App() {
         amazonVal: "",
         shopifyOpt: "",
         shopifyVal: "",
-        disabled: false,
       },
     ]);
   };
 
-  console.log(components);
+  // console.log(components);
 
   return (
     <div className="App">

@@ -6,32 +6,29 @@ function Box({ id, components, handleComponent }) {
   const [amazonVal, setAmazonVal] = useState("");
   const [shopifyOpt, setShopifyOpt] = useState("");
   const [shopifyVal, setShopifyVal] = useState("");
-  // console.log(id, amazonVal, shopifyOpt, shopifyVal);
 
   useEffect(() => {
-    // let found = components.find((item) => item.id === id);
-    // const newVal = { ...found, amazonVal, shopifyOpt, shopifyVal };
+    let found = components.find((item) => item.id === id);
+    const newVal = { ...found, amazonVal, shopifyOpt, shopifyVal };
     let newComponentList = components.map((element) => {
-      return element.id !== id
-        ? { ...element, amazonVal, shopifyOpt, shopifyVal }
-        : { ...element };
+      if (element.id === id) {
+        return { ...element, ...newVal };
+      }
+      return { ...element };
     });
     handleComponent(newComponentList);
-
-    return () => {};
   }, [amazonVal, shopifyOpt, shopifyVal]);
 
-  // const disableOption = (option) => {
-  //   const finding = components.findIndex((item) => item.amazonVal === option);
-  //   return finding;
-  // };
+  const handleDisable = (option) => {
+    const foundIdx = components.findIndex((item) => item.amazonVal === option);
+    // console.log(foundIdx);
+    return foundIdx;
+  };
 
   const handleClick = () => {
     let newComponentList = components.filter((comp) => comp.id !== id);
     handleComponent(newComponentList);
   };
-
-  // console.log(disableOption());
 
   return (
     <div className="dropdowns">
@@ -53,7 +50,7 @@ function Box({ id, components, handleComponent }) {
                 <option
                   key={i}
                   value={item}
-                  // disabled={disableOption(item) ? false : true}
+                  disabled={handleDisable(item) ? false : true}
                 >
                   {item}
                 </option>
