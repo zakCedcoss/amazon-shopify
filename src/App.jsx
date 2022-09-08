@@ -23,7 +23,7 @@ function App() {
     ]);
   };
 
-  // console.log(components);
+  console.log(components);
 
   return (
     <div className="App">

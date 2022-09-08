@@ -20,9 +20,9 @@ function Box({ id, components, handleComponent }) {
   }, [amazonVal, shopifyOpt, shopifyVal]);
 
   const handleDisable = (option) => {
-    const foundIdx = components.findIndex((item) => item.amazonVal === option);
-    // console.log(foundIdx);
-    return foundIdx;
+    const found = components.find((item) => item.amazonVal === option);
+    if (found) return true;
+    else return false;
   };
 
   const handleClick = () => {
@@ -50,7 +50,7 @@ function Box({ id, components, handleComponent }) {
                 <option
                   key={i}
                   value={item}
-                  disabled={handleDisable(item) ? false : true}
+                  disabled={handleDisable(item) ? true : false}
                 >
                   {item}
                 </option>
