@@ -15,10 +15,11 @@ function App() {
       ...components,
       {
         id,
-        Src: Box,
+        Box,
         amazonVal: "",
         shopifyOpt: "",
         shopifyVal: "",
+        disabled: false,
       },
     ]);
   };
@@ -32,17 +33,23 @@ function App() {
           <h3>Optional Attributes</h3>
           <button onClick={handleClick}>Add Attribute</button>
         </div>
+        {components.length === 0 && (
+          <div className="caution">
+            Nothing to Show. Please click add attribute to show dropdowns
+          </div>
+        )}
+        {components.map((comp) => {
+          const { Box, id } = comp;
+          return (
+            <Box
+              key={id}
+              id={id}
+              components={components}
+              handleComponent={handleComponent}
+            />
+          );
+        })}
       </section>
-      {components.map((Comp) => {
-        return (
-          <Comp.Src
-            key={Comp.id}
-            id={Comp.id}
-            components={components}
-            handleComponent={handleComponent}
-          />
-        );
-      })}
     </div>
   );
 }
